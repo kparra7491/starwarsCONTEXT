@@ -1,9 +1,9 @@
 import React from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
-import { Peoplecard } from "../component/peoplecard";
+import { Planetscard } from "../component/planetscard";
 
-export class Home extends React.Component {
+export class Planetcardview extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -14,7 +14,7 @@ export class Home extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch("https://www.swapi.tech/api/people/")
+		fetch("https://www.swapi.tech/api/planets/")
 			.then(function(response) {
 				if (!response.ok) {
 					throw Error(response.statusText);
@@ -38,11 +38,9 @@ export class Home extends React.Component {
 		return (
 			<div className="  d-flex contentrow">
 				{this.state.songs.map(item => {
-					return <Peoplecard key={item.uid} propPerson={item} />;
+					return <Planetscard key={item.uid} propPlanet={item} />;
 				})}
 			</div>
 		);
 	}
 }
-
-//convert this to a class, pass fetch data into card on componentdidmount

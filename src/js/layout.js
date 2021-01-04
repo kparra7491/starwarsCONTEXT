@@ -3,12 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
+import { Planetcardview } from "./views/planetcardview";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { People } from "./component/people";
 
 //create your first component
 const Layout = () => {
@@ -23,14 +25,21 @@ const Layout = () => {
 					<Navbar />
 					<Switch>
 						<Route exact path="/">
+							<div className="d-flex flex-row justify-content-center">
+								<h1>Characters</h1>
+							</div>
 							<Home />
+							<div className="d-flex flex-row justify-content-center">
+								<h1>Planets</h1>
+							</div>
+							<Planetcardview />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
+
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
+						<Route exact path="/planets/:id" component={People} />
+						<Route exact path="/people/:id" component={People} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

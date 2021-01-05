@@ -21,7 +21,7 @@ export class People extends React.Component {
 					<div className="col-md-8">
 						<div className="card-body">
 							<h5 className="card-title">{info.name}</h5>
-							<p className="card-text">
+							<div className="card-text">
 								<ul className=" ">
 									{info.map((item, i) => {
 										let infoLabel = labels[i].split("_").join(" ");
@@ -37,7 +37,7 @@ export class People extends React.Component {
 										}
 									})}
 								</ul>
-							</p>
+							</div>
 						</div>
 					</div>
 				</div>

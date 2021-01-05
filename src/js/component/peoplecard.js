@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import chewie from "../../img/chewie.jpg";
 import "../../styles/peoplecard.scss";
+import { Context } from "../store/appContext";
 
 export class Peoplecard extends React.Component {
 	constructor(props) {
@@ -56,29 +57,38 @@ export class Peoplecard extends React.Component {
 
 	render() {
 		return (
-			<div className="  itemcards ">
-				<img className="placeholder" src={chewie} alt="Card image cap" />
-				<div className="body">
-					<div className="title ">{this.state.person.result.properties.name}</div>
-					<div className="text ">
-						{this.state.person.result.description}
-						{this.state.person.result.properties.height}
-						{this.state.person.result.properties.mass}
+			<Context.Consumer>
+				{(
+					{ store, actions } //Object deconstruction for faster coding
+				) => (
+					<div className="  itemcards ">
+						<img className="placeholder" src={chewie} alt="Card image cap" />
+						<div className="body">
+							<div className="title ">{this.state.person.result.properties.name}</div>
+							<div className="text ">
+								{this.state.person.result.description}
+								{this.state.person.result.properties.height}
+								{this.state.person.result.properties.mass}
+							</div>
+							<Link
+								to={{
+									pathname: "/people/" + this.state.person.result.uid,
+									state: { personInfoProp: this.state.person }
+								}}>
+								<button className="btn btn-secondary" type="button">
+									Learn More!
+								</button>
+							</Link>
+							<button
+								className="btn btn-secondary"
+								type="button"
+								onClick={() => actions.addFavorite(this.state.person.result.uid)}>
+								Favorite
+							</button>
+						</div>
 					</div>
-					<Link
-						to={{
-							pathname: "/people/" + this.state.person.result.uid,
-							state: { personInfoProp: this.state.person }
-						}}>
-						<button className="btn btn-secondary" type="button">
-							Learn More!
-						</button>
-					</Link>
-					<button className="btn btn-secondary" type="button">
-						Favorite
-					</button>
-				</div>
-			</div>
+				)}
+			</Context.Consumer>
 		);
 	}
 }
